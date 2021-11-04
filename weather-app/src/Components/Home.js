@@ -56,7 +56,7 @@ const Home = () => {
 
   return (
     <main>
-      <div>
+      <div className="search-box">
         <input
           type="text"
           className="search-bar"
@@ -67,23 +67,28 @@ const Home = () => {
           value={query} // find the value equal to query
           onKeyPress={searchWeather}
         />
+        <i class="fas fa-search svg"></i>
       </div>
 
       {typeof weather.main != "undefined" ? (
         <>
-          <div>
+          <div className="weather-container">
             <div>
-              {weather.name}, {weather.sys.country}
+              <div>
+                {weather.name}, {weather.sys.country}
+              </div>
+              <div>{weatherCurrentTime(new Date())}</div>
             </div>
-            <div>{weatherCurrentTime(new Date())}</div>
-          </div>
 
-          <div className="weather-box">
-            <div className="temperature">
-              {Math.round(weather.main.temp)} °C
+            <div className="weather-box">
+              <div className="temperature">
+                {Math.round(weather.main.temp)} °C
+              </div>
+              <div className="weather-description">
+                {weather.weather[0].description}
+              </div>
+              <div>{weather.weather[0].icon}</div>
             </div>
-            <div className="weather-description">{weather.weather[0].description}</div>
-            <div>{weather.weather[0].icon}</div>
           </div>
         </>
       ) : (
