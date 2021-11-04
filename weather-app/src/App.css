@@ -1,7 +1,45 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Montserrat", sans-serif;
+}
+body {
+  background: url('https://images.unsplash.com/photo-1627037558426-c2d07beda3af?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1275&q=80');
+  background-position: bottom;
+  background-size: cover;
+  background-repeat: no-repeat;
+  display: flex;
+  /* justify-content: center; */
+  align-items: center;
+}
 
-body{
-margin: 0;
-padding: 0;
-box-sizing: border-box;
-background: rgb(250, 241, 241);
+main {
+  height: 100vh;
+  padding: 30px;
+  background-image: linear-gradient(to bottom, rgba(0,0,0,.2), rgba(0,0,0,.75));
+  background-color: rgba(190, 219, 143, 0.918);
+  backdrop-filter: blur(250px);
+}
+
+
+.search-bar {
+  background: inherit;
+  padding: 15px;
+  border-left: none;
+  border-top: none;
+  border-right: none;
+  border-bottom: 2px solid white;
+  font-size: 15px;
+  outline-width: 0;
+  color:rgb(0, 0, 0);
+
+
+}
+.weather-box{
+  background:rgb(141, 155, 141);
+}
+
+.weather-description{
+  color:blueviolet;
 }

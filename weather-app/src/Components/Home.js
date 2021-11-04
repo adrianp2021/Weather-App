@@ -6,21 +6,20 @@ const Home = () => {
     base: "https://api.openweathermap.org/data/2.5/",
   };
 
-  const [query, setQuery] = useState('');
+  const [query, setQuery] = useState("");
   const [weather, setWeather] = useState({});
-  
+
   const searchWeather = (event) => {
     if (event.key === "Enter") {
-      fetch(`${api.base}weather?q=${query}&units=metric&APPID=${api.key}`) 
+      fetch(`${api.base}weather?q=${query}&units=metric&APPID=${api.key}`)
         .then((res) => res.json())
         .then((result) => {
           setWeather(result);
-          setQuery('');
+          setQuery("");
           console.log("what is the result ->", result);
         });
     }
   };
-
 
   function weatherCurrentTime(d) {
     let months = [
@@ -47,14 +46,13 @@ const Home = () => {
       "Saturday",
     ];
 
-
     let day = days[d.getDay()];
     let date = d.getDate();
     let month = months[d.getMonth()];
     let year = d.getFullYear();
 
     return `${day} ${date} ${month} ${year}`;
-  } 
+  }
 
   return (
     <main>
@@ -64,10 +62,10 @@ const Home = () => {
           className="search-bar"
           placeholder="Search..."
           onChange={(e) => {
-            setQuery(e.target.value);  // get the value of input typed in, 
+            setQuery(e.target.value); // get the value of input typed in,
           }}
-          value={query}                // find the value equal to query
-          onKeyPress={searchWeather}   
+          value={query} // find the value equal to query
+          onKeyPress={searchWeather}
         />
       </div>
 
@@ -84,6 +82,7 @@ const Home = () => {
             <div className="temperature">
               {Math.round(weather.main.temp)} °C
             </div>
+            <div className="weather-description">{weather.weather[0].description}</div>
             <div>{weather.weather[0].icon}</div>
           </div>
         </>
