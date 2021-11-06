@@ -6,6 +6,9 @@ const Home = () => {
     base: "https://api.openweathermap.org/data/2.5/",
   };
 
+
+
+
   const [query, setQuery] = useState("");
   const [weather, setWeather] = useState({});
 
@@ -20,6 +23,9 @@ const Home = () => {
         });
     }
   };
+
+
+  const iconURL = 'http://openweathermap.org/img/wn/' + `${weather.weather[0].icon}` + '.png'
 
   function weatherCurrentTime(d) {
     let months = [
@@ -67,27 +73,43 @@ const Home = () => {
           value={query} // find the value equal to query
           onKeyPress={searchWeather}
         />
-        <i class="fas fa-search svg"></i>
+        <i className="fas fa-search svg"></i>
       </div>
 
       {typeof weather.main != "undefined" ? (
         <>
-          <div className="weather-container">
-            <div>
+          <div id="weather">
+            <div className="weather-container">
               <div>
-                {weather.name}, {weather.sys.country}
+                <div>
+                  {weather.name}, {weather.sys.country}
+                </div>
+                <div>{weatherCurrentTime(new Date())}</div>
               </div>
-              <div>{weatherCurrentTime(new Date())}</div>
-            </div>
 
-            <div className="weather-box">
-              <div className="temperature">
-                {Math.round(weather.main.temp)} °C
+              <div className="weather-box">
+              <div>as of {new Date().toLocaleTimeString()}</div>
+                <div className="temperature">
+                  {Math.round(weather.main.temp)} °C
+                </div>
+                <div className="weather-description">
+                  {weather.weather[0].description}
+                </div>
+                <div>Feels like {Math.round(weather.main.feels_like)}</div>
+                <div>
+                  Minimum temperature {Math.round(weather.main.temp_min)}{" "}
+                </div>
+                <div>
+                  Maximum temperature {Math.round(weather.main.temp_max)}{" "}
+                </div>
+                <div>Humidity {Math.round(weather.main.humidity)} </div>
+
+                <img src={iconURL} className="weather-icon" alt="" />
+
+                <div className="weather-wind-container">
+                  <div>Wind {Math.round(weather.wind.speed)}km </div>
+                </div>
               </div>
-              <div className="weather-description">
-                {weather.weather[0].description}
-              </div>
-              <div>{weather.weather[0].icon}</div>
             </div>
           </div>
         </>
