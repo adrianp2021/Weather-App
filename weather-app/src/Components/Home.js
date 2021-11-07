@@ -6,11 +6,12 @@ const Home = () => {
     base: "https://api.openweathermap.org/data/2.5/",
   };
 
-
-
+  let url = "http://openweathermap.org/img/wn/";
+  let png = '@2x.png'
 
   const [query, setQuery] = useState("");
   const [weather, setWeather] = useState({});
+  const [error, setError] = useState(false);
 
   const searchWeather = (event) => {
     if (event.key === "Enter") {
@@ -19,13 +20,11 @@ const Home = () => {
         .then((result) => {
           setWeather(result);
           setQuery("");
+          setError();
           console.log("what is the result ->", result);
         });
     }
   };
-
-
-  const iconURL = 'http://openweathermap.org/img/wn/' + `${weather.weather[0].icon}` + '.png'
 
   function weatherCurrentTime(d) {
     let months = [
@@ -60,6 +59,10 @@ const Home = () => {
     return `${day} ${date} ${month} ${year}`;
   }
 
+  // need to review this piece of code. when refreshing the page, error is produced in the console
+  // Uncaught TypeError: Cannot read properties of undefined (reading '0')
+  const iconURL = `${url}${weather.weather[0].icon}${png}`;
+
   return (
     <main>
       <div className="search-box">
@@ -86,9 +89,8 @@ const Home = () => {
                 </div>
                 <div>{weatherCurrentTime(new Date())}</div>
               </div>
-
               <div className="weather-box">
-              <div>as of {new Date().toLocaleTimeString()}</div>
+                <div>as of {new Date().toLocaleTimeString()}</div>
                 <div className="temperature">
                   {Math.round(weather.main.temp)} °C
                 </div>
@@ -103,9 +105,7 @@ const Home = () => {
                   Maximum temperature {Math.round(weather.main.temp_max)}{" "}
                 </div>
                 <div>Humidity {Math.round(weather.main.humidity)} </div>
-
                 <img src={iconURL} className="weather-icon" alt="" />
-
                 <div className="weather-wind-container">
                   <div>Wind {Math.round(weather.wind.speed)}km </div>
                 </div>
