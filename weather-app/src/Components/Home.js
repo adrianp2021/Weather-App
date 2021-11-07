@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from "react";
+import { WiSunrise } from "react-icons/wi";
+import { WiSunset } from "react-icons/wi";
 
 const Home = () => {
   const api = {
@@ -9,17 +11,20 @@ const Home = () => {
   // let url = "http://openweathermap.org/img/wn/";
   // let png = '@2x.png'
 
-  const [query, setQuery] = useState('');
+  const [query, setQuery] = useState("");
   const [weather, setWeather] = useState({});
-  const [iconURL, setIconURL] = useState('')
+  const [iconURL, setIconURL] = useState("");
 
   useEffect(() => {
     if (weather && weather.weather) {
-      setIconURL('http://openweathermap.org/img/wn/' + `${weather.weather[0].icon}` + '.png')
+      setIconURL(
+        "http://openweathermap.org/img/wn/" +
+          `${weather.weather[0].icon}` +
+          "@4x.png"
+      );
       // console.log('what is weather',weather)
     }
-  }, [weather])
-  
+  }, [weather]);
 
   const searchWeather = (event) => {
     if (event.key === "Enter") {
@@ -27,12 +32,11 @@ const Home = () => {
         .then((res) => res.json())
         .then((result) => {
           setWeather(result);
-          setQuery('');
+          setQuery("");
           console.log("what is the result ->", result);
         });
     }
   };
-
 
   // console.log('what is iconURL', iconURL)
 
@@ -69,17 +73,13 @@ const Home = () => {
     return `${day} ${date} ${month} ${year}`;
   }
 
-  // need to review this piece of code. when refreshing the page, error is produced in the console
-  // Uncaught TypeError: Cannot read properties of undefined (reading '0')
-
-
   return (
     <main>
       <div className="search-box">
         <input
           type="text"
           className="search-bar"
-          placeholder="Search..."
+          placeholder="City..."
           onChange={(e) => {
             setQuery(e.target.value); // get the value of input typed in,
           }}
@@ -88,42 +88,63 @@ const Home = () => {
         />
         <i className="fas fa-search svg"></i>
       </div>
+      {/* <div>{new Date().toLocaleTimeString()}</div> */}
 
       {typeof weather.main != "undefined" ? (
         <>
-          <div id="weather">
+          <div >
             <div className="weather-container">
               <div>
-                <div>
+                <div className="country-name">
                   {weather.name}, {weather.sys.country}
                 </div>
-                <div>{weatherCurrentTime(new Date())}</div>
+                <div className="today-date">{weatherCurrentTime(new Date())}</div>
               </div>
 
               <div className="weather-box">
-                <div>as of {new Date().toLocaleTimeString()}</div>
                 <div className="temperature">
-                  {Math.round(weather.main.temp)} °C
+                  <div className="degrees">
+                  {Math.round(weather.main.temp)} <span id="celsius">°C</span></div>
+                  <img src={iconURL} className="weather-icon" alt="" />
                 </div>
+
+                
+
                 <div className="weather-description">
                   {weather.weather[0].description}
                 </div>
+
                 <div>Feels like {Math.round(weather.main.feels_like)}</div>
+                
                 <div>
                   Minimum temperature {Math.round(weather.main.temp_min)}{" "}
                 </div>
 
                 <div>
-                  Minimum temperature {Math.round(weather.main.temp_min)}{" "}
+                  Maximum temperature {Math.round(weather.main.temp_max)}{" "}
                 </div>
 
-                <div>
-                  Maximum temperature {Math.round(weather.main.pressure)}{" "}
-                </div>
+                <div>Pressure {Math.round(weather.main.pressure)} hPa</div>
+
                 <div>Humidity {Math.round(weather.main.humidity)}%</div>
-                <img src={iconURL} className="weather-icon" alt="" />  
+
                 <div className="weather-wind-container">
-                  <div>Wind {Math.round(weather.wind.speed)}km </div>
+                  <div>Wind {Math.round(weather.wind.speed)}km/hr </div>
+                </div>
+                {/* <br /> */}
+
+                <div id="display-flex">
+                  <WiSunrise id="sunrise" />
+                  {new Date(
+                    weather.sys.sunrise * 1000
+                  ).toLocaleTimeString()}{" "}
+                </div>
+
+                {/* <br /> */}
+                <div id="display-flex">
+                  <WiSunset id="sunset" />
+
+                  {new Date(weather.sys.sunset * 1000).toLocaleTimeString()}
                 </div>
               </div>
             </div>
