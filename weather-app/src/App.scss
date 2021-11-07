@@ -15,22 +15,25 @@ main {
   background: purple;
 }
 
-#app-title{
-  font-size: 22px;
+#app-title {
+  font-size: 25px;
+  font-weight: lighter;
   text-transform: uppercase;
   transform: scaleZ(1.2);
   letter-spacing: 3px;
   color: white;
 }
+h1#app-title {
+  margin-top: 20px;
+  margin-right: 10px;
+}
 
-.search-box{
+.search-box {
   width: fit-content;
   height: fit-content;
   position: relative;
-  // margin-top: 20px;
-  margin-bottom: 20px;
 }
-.input-search{
+.input-search {
   height: 50px;
   width: 50px;
   border-style: none;
@@ -39,18 +42,18 @@ main {
   letter-spacing: 2px;
   outline: none;
   border-radius: 25px;
-  transition: all .5s ease-in-out;
+  transition: all 0.5s ease-in-out;
   background-color: #22a6b3;
   padding-right: 40px;
-  color:#fff;
+  color: #fff;
 }
-.input-search::placeholder{
-  color:rgba(255,255,255,.5);
+.input-search::placeholder {
+  color: rgba(255, 255, 255, 0.5);
   font-size: 18px;
   letter-spacing: 2px;
   font-weight: 100;
 }
-.btn-search{
+.btn-search {
   width: 50px;
   height: 50px;
   border-style: none;
@@ -61,23 +64,23 @@ main {
   border-radius: 50%;
   position: absolute;
   right: 0px;
-  color:#ffffff ;
-  background-color:transparent;
-  pointer-events: painted;  
+  color: #ffffff;
+  background-color: transparent;
+  pointer-events: painted;
 }
-.btn-search:focus ~ .input-search{
+.btn-search:focus ~ .input-search {
   width: 300px;
   border-radius: 0px;
   background-color: transparent;
-  border-bottom:1px solid rgba(255,255,255,.5);
-  transition: all 500ms cubic-bezier(0, 0.110, 0.35, 2);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+  transition: all 500ms cubic-bezier(0, 0.11, 0.35, 2);
 }
-.input-search:focus{
+.input-search:focus {
   width: 300px;
   border-radius: 0px;
   background-color: transparent;
-  border-bottom:1px solid rgba(255,255,255,.5);
-  transition: all 500ms cubic-bezier(0, 0.110, 0.35, 2);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+  transition: all 500ms cubic-bezier(0, 0.11, 0.35, 2);
 }
 
 ::placeholder {
@@ -85,71 +88,95 @@ main {
 }
 .svg {
   font-size: 25px;
-  color: rgb(233, 226, 220);
+  color: rgb(250, 239, 229);
   cursor: pointer;
 }
 
+#display-flex > svg > path:nth-child(1){
+  color:rgb(88, 144, 182);
+}
+#display-flex > svg > path:nth-child(2){
+  color:yellow;
+}
 .container {
   padding: 100px;
+  height: 70vh;
   width: 100%;
-  // height: 100%;
   background: rgb(83, 5, 77);
   color: white;
-  // display: flex;
+  border-radius: 5px;
+  background: linear-gradient(rgb(83, 5, 77), rgb(80, 2, 70));
 }
 
-#top-weather-section{
+#top-weather-section {
   display: flex;
   justify-content: space-between;
 }
 
-#display{
+#display {
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
-#sunrise, #sunset{
+#display-flex {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+#sunrise,
+#sunset {
   margin-right: 10px;
   font-size: 40px;
 }
-#sunset{
-  color: rgb(241, 102, 9)
-  
+#sunset {
+  color: rgb(241, 102, 9);
 }
-#sunrise{
-  color:rgb(255, 230, 0);
+#sunrise {
+  color: rgb(255, 230, 0);
 }
 
-.country-name{
-  color:rgb(247, 242, 242);
-  font-size: 38px;
-}
-.today-date{
-  font-size: 13px;
-  color:rgb(248, 168, 168);
-  margin-top: 20px;
-}
-.temperature{
-  display: flex;
-  justify-content:flex-start;
-  align-items:center;
-  font-size: 80px;
-}
-.degrees{
-  display: flex;
-  font-size: 150px;
-  margin-right: 10px;
-  margin-top: 30px;
-  width: 300px;
-}
-#celsius{
+.country-name {
+  color: rgb(247, 242, 242);
   font-size: 28px;
 }
-.weather-icon{
+.today-date {
+  font-size: 13px;
+  color: rgb(248, 168, 168);
+  margin-top: 20px;
+}
+.temperature {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  font-size: 80px;
+}
+.degrees {
+  font-size: 150px;
+  margin-right: 100px;
+  margin-top: 30px;
+  width: 300px;
+  display: flex;
+}
+#block {
+  display: block;
+}
+#flex {
+  display: flex;
+  font-size: 120px;
+  margin-right: 180px;
+}
+#feels {
+  margin-top: 50px;
+  font-size: 13px;
+}
+#celsius {
+  font-size: 28px;
+}
+.weather-icon {
   height: 220px;
 }
 
-.feels{
+.feels {
   font-size: 15px;
 }
 
@@ -157,20 +184,17 @@ main {
   color: blueviolet;
 }
 
-
-
-#display-flex{
+#display-flex {
   display: flex;
   justify-content: center;
   align-items: center;
 }
-
-
-
-
+#icons {
+  font-size: 35px;
+}
 
 @media only all and (max-width: 600px) {
-  .search-box{
+  .search-box {
     height: 100px;
   }
   .search-box:hover > .search-bar {

@@ -1,7 +1,19 @@
 import React, { useEffect, useState } from "react";
 import { WiSunrise } from "react-icons/wi";
 import { WiSunset } from "react-icons/wi";
-import { Container, Divider, Grid, Header, Segment } from "semantic-ui-react";
+import { BsCloudSunFill } from "react-icons/bs";
+import { WiHumidity, WiBarometer } from "react-icons/wi";
+import { FiWind } from "react-icons/fi";
+import { FaTemperatureLow, FaTemperatureHigh } from "react-icons/fa";
+import { GoReport } from "react-icons/go";
+import {
+  Container,
+  Divider,
+  Grid,
+  Header,
+  Segment,
+  Image,
+} from "semantic-ui-react";
 
 const Home = () => {
   const api = {
@@ -74,7 +86,6 @@ const Home = () => {
   return (
     <main>
       <Header as="h1" id="display">
-        <h1 id="app-title">Weather App</h1>
         <div className="search-box">
           <button className="btn-search">
             <i className="fas fa-search"></i>
@@ -90,20 +101,11 @@ const Home = () => {
             onKeyPress={searchWeather}
           />
         </div>
+        <div id="display-flex">
+          <h1 id="app-title">Weather App</h1>
+          <BsCloudSunFill className="logo" />
+        </div>
       </Header>
-      {/* <div className="search-box">
-        <input
-          type="text"
-          className="search-bar"
-          placeholder="Search the city..."
-          onChange={(e) => {
-            setQuery(e.target.value); // get the value of input typed in,
-          }}
-          value={query} // find the value equal to query
-          onKeyPress={searchWeather}
-        />
-        <i className="fas fa-search svg"></i>
-      </div> */}
 
       {/* <div>{new Date().toLocaleTimeString()}</div> */}
 
@@ -136,45 +138,61 @@ const Home = () => {
               </div>
             </div>
 
-            {/* <div> */}
             <div className="temperature">
               <div>
-                <div className="degrees">
+                <div id="flex">
                   {Math.round(weather.main.temp)} <span id="celsius">°C</span>
                 </div>
-                <div className="feels">
+                <div id="feels">
                   Feels {Math.round(weather.main.feels_like)}°C
                 </div>
               </div>
+
               <img src={iconURL} className="weather-icon" alt="" />
             </div>
 
-            <Grid columns={3} divided>
+            <Grid columns={3} divided="vertically">
               <Grid.Row>
                 <Grid.Column>
+                  <GoReport id="icons" />
                   <div>{weather.weather[0].description}</div>
                 </Grid.Column>
-                <div>
-                  Minimum temperature {Math.round(weather.main.temp_min)}{" "}
-                </div>
-
-                <div>
-                  Maximum temperature {Math.round(weather.main.temp_max)}{" "}
-                </div>
+                <Grid.Column>
+                  <div>
+                    <FaTemperatureLow id="icons" />
+                    {Math.round(weather.main.temp_min)}{" "}
+                  </div>
+                </Grid.Column>
+                <Grid.Column>
+                  <div>
+                    <FaTemperatureHigh id="icons" />
+                    {Math.round(weather.main.temp_max)}{" "}
+                  </div>
+                </Grid.Column>
               </Grid.Row>
 
               <Grid.Row>
                 <Grid.Column>
-                  <div>Pressure {Math.round(weather.main.pressure)} hPa</div>
+                  {/* <Image src='/images/wireframe/media-paragraph.png' /> */}
+                  <div>
+                    <WiBarometer id="icons" />
+                    {Math.round(weather.main.pressure)} hPa
+                  </div>
                 </Grid.Column>
                 <Grid.Column>
-                  <div>Humidity {Math.round(weather.main.humidity)}%</div>
+                  <div>
+                    <WiHumidity id="icons" />
+                    {Math.round(weather.main.humidity)}%
+                  </div>
                 </Grid.Column>
 
                 <Grid.Column>
-                  <div className="weather-wind-container">
-                    <div>Wind {Math.round(weather.wind.speed)}km/hr </div>
+                  {/* <div className="weather-wind-container"> */}
+                  <div>
+                    <FiWind id="icons" />
+                    {Math.round(weather.wind.speed)}km/hr{" "}
                   </div>
+                  {/* </div> */}
                 </Grid.Column>
               </Grid.Row>
             </Grid>
