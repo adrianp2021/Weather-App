@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 const Home = () => {
   const api = {
@@ -6,12 +6,20 @@ const Home = () => {
     base: "https://api.openweathermap.org/data/2.5/",
   };
 
-  let url = "http://openweathermap.org/img/wn/";
-  let png = '@2x.png'
+  // let url = "http://openweathermap.org/img/wn/";
+  // let png = '@2x.png'
 
-  const [query, setQuery] = useState("");
+  const [query, setQuery] = useState('');
   const [weather, setWeather] = useState({});
-  const [error, setError] = useState(false);
+  const [iconURL, setIconURL] = useState('')
+
+  useEffect(() => {
+    if (weather && weather.weather) {
+      setIconURL('http://openweathermap.org/img/wn/' + `${weather.weather[0].icon}` + '.png')
+      // console.log('what is weather',weather)
+    }
+  }, [weather])
+  
 
   const searchWeather = (event) => {
     if (event.key === "Enter") {
@@ -19,12 +27,14 @@ const Home = () => {
         .then((res) => res.json())
         .then((result) => {
           setWeather(result);
-          setQuery("");
-          setError();
+          setQuery('');
           console.log("what is the result ->", result);
         });
     }
   };
+
+
+  // console.log('what is iconURL', iconURL)
 
   function weatherCurrentTime(d) {
     let months = [
@@ -61,7 +71,7 @@ const Home = () => {
 
   // need to review this piece of code. when refreshing the page, error is produced in the console
   // Uncaught TypeError: Cannot read properties of undefined (reading '0')
-  const iconURL = `${url}${weather.weather[0].icon}${png}`;
+
 
   return (
     <main>
@@ -89,6 +99,7 @@ const Home = () => {
                 </div>
                 <div>{weatherCurrentTime(new Date())}</div>
               </div>
+
               <div className="weather-box">
                 <div>as of {new Date().toLocaleTimeString()}</div>
                 <div className="temperature">
@@ -101,11 +112,16 @@ const Home = () => {
                 <div>
                   Minimum temperature {Math.round(weather.main.temp_min)}{" "}
                 </div>
+
                 <div>
-                  Maximum temperature {Math.round(weather.main.temp_max)}{" "}
+                  Minimum temperature {Math.round(weather.main.temp_min)}{" "}
                 </div>
-                <div>Humidity {Math.round(weather.main.humidity)} </div>
-                <img src={iconURL} className="weather-icon" alt="" />
+
+                <div>
+                  Maximum temperature {Math.round(weather.main.pressure)}{" "}
+                </div>
+                <div>Humidity {Math.round(weather.main.humidity)}%</div>
+                <img src={iconURL} className="weather-icon" alt="" />  
                 <div className="weather-wind-container">
                   <div>Wind {Math.round(weather.wind.speed)}km </div>
                 </div>
