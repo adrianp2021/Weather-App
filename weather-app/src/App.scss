@@ -7,27 +7,28 @@
 body {
   background: purple;
 }
-
 main {
   height: 100vh;
   width: 100vw;
   padding: 30px;
-  background: purple;
+  background-color: #1b1b16;
+  background-image: radial-gradient(
+      at 47% 33%,
+      hsl(162, 77%, 40%) 0,
+      transparent 59%
+    ),
+    radial-gradient(at 82% 65%, hsl(218.03, 76%, 52%) 0, transparent 55%);
 }
 
-#app-title {
-  font-size: 25px;
-  font-weight: lighter;
-  text-transform: uppercase;
-  transform: scaleZ(1.2);
-  letter-spacing: 3px;
-  color: white;
+// CLASSES
+.ui.container.container {
+  margin-top: 40px;
+  backdrop-filter: blur(6px) saturate(155%);
+  -webkit-backdrop-filter: blur(6px) saturate(155%);
+  background-color: rgba(17, 25, 40, 0.11);
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.125);
 }
-h1#app-title {
-  margin-top: 20px;
-  margin-right: 10px;
-}
-
 .search-box {
   width: fit-content;
   height: fit-content;
@@ -82,7 +83,6 @@ h1#app-title {
   border-bottom: 1px solid rgba(255, 255, 255, 0.5);
   transition: all 500ms cubic-bezier(0, 0.11, 0.35, 2);
 }
-
 ::placeholder {
   color: rgb(252, 248, 248);
 }
@@ -91,32 +91,80 @@ h1#app-title {
   color: rgb(250, 239, 229);
   cursor: pointer;
 }
-
-#display-flex > svg > path:nth-child(1){
-  color:rgb(88, 144, 182);
-}
-#display-flex > svg > path:nth-child(2){
-  color:yellow;
-}
 .container {
-  padding: 100px;
-  height: 70vh;
-  width: 100%;
-  background: rgb(83, 5, 77);
+  padding:60px;
   color: white;
-  border-radius: 5px;
-  background: linear-gradient(rgb(83, 5, 77), rgb(80, 2, 70));
+}
+.country-name {
+  color: rgb(247, 242, 242);
+  font-size: 28px;
+}
+.today-date {
+  font-size: 13px;
+  color: rgb(248, 168, 168);
+  margin-top: 20px;
+}
+.degrees {
+  font-size: 150px;
+  margin-right: 100px;
+  margin-top: 30px;
+  width: 300px;
+  display: flex;
+}
+.weather-icon {
+  height: 220px;
+}
+.feels {
+  font-size: 15px;
+}
+.weather-description {
+  color: blueviolet;
+}
+.temperature {
+  font-size: 200px;
+  margin-right: 100px;
 }
 
-#top-weather-section {
-  display: flex;
-  justify-content: space-between;
-}
 
-#display {
+// IDs
+#app-title {
+  font-size: 25px;
+  font-weight: lighter;
+  text-transform: uppercase;
+  transform: scaleZ(1.2);
+  letter-spacing: 3px;
+  color: white;
+}
+h1#app-title {
+  margin-top: 20px;
+  margin-right: 10px;
+}
+#display-flex > svg > path:nth-child(1) {
+  color: rgb(88, 144, 182);
+}
+#display-flex > svg > path:nth-child(2) {
+  color: yellow;
+}
+#block {
+  display: block;
+}
+#flex {
   display: flex;
-  justify-content: space-between;
+  font-size: 120px;
+  margin-right: 180px;
+}
+#feels {
+  margin-top: 50px;
+  font-size: 13px;
+  text-align: center;
+}
+#display-flex {
+  display: flex;
+  justify-content: center;
   align-items: center;
+}
+#icons {
+  font-size: 35px;
 }
 #display-flex {
   display: flex;
@@ -134,66 +182,37 @@ h1#app-title {
 #sunrise {
   color: rgb(255, 230, 0);
 }
-
-.country-name {
-  color: rgb(247, 242, 242);
-  font-size: 28px;
-}
-.today-date {
-  font-size: 13px;
-  color: rgb(248, 168, 168);
-  margin-top: 20px;
-}
-.temperature {
+#top-weather-section {
   display: flex;
-  justify-content: flex-start;
+  justify-content: space-between;
+}
+#display {
+  display: flex;
+  justify-content: space-between;
   align-items: center;
-  font-size: 80px;
 }
-.degrees {
-  font-size: 150px;
-  margin-right: 100px;
-  margin-top: 30px;
-  width: 300px;
-  display: flex;
-}
-#block {
-  display: block;
-}
-#flex {
-  display: flex;
-  font-size: 120px;
-  margin-right: 180px;
-}
-#feels {
+#temperature-container {
   margin-top: 50px;
-  font-size: 13px;
+  display: flex;
+  align-items: center;
+}
+#temperature-div {
+  width: 200px;
+  height: 250px;
+  font-size: 120px;
+  display: flex;
 }
 #celsius {
-  font-size: 28px;
-}
-.weather-icon {
-  height: 220px;
+  margin-bottom: 70px;
+  font-size: 25px;
 }
 
-.feels {
-  font-size: 15px;
-}
 
-.weather-description {
-  color: blueviolet;
-}
-
-#display-flex {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-#icons {
-  font-size: 35px;
-}
-
+// MEDIA QUERY - in progress!
 @media only all and (max-width: 600px) {
+  body{
+    height: inherit;
+  }
   .search-box {
     height: 100px;
   }
@@ -201,8 +220,7 @@ h1#app-title {
     width: 100%;
     padding: 0 6px;
   }
-  .weather-container {
-    width: 100%;
-    height: 80vh;
+  main{
+    height: 100vh;
   }
 }

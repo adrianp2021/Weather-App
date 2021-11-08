@@ -138,20 +138,20 @@ const Home = () => {
               </div>
             </div>
 
-            <div className="temperature">
+            <div id="temperature-container">
               <div>
-                <div id="flex">
-                  {Math.round(weather.main.temp)} <span id="celsius">°C</span>
-                </div>
-                <div id="feels">
-                  Feels {Math.round(weather.main.feels_like)}°C
+                <div className="temperature">
+                  {Math.round(weather.main.temp)}
+                  <span id="celsius">°C</span>
                 </div>
               </div>
 
+              <div>
               <img src={iconURL} className="weather-icon" alt="" />
+              </div>
             </div>
 
-            <Grid columns={3} divided="vertically">
+            <Grid columns={3} divided>
               <Grid.Row>
                 <Grid.Column>
                   <GoReport id="icons" />
@@ -187,7 +187,6 @@ const Home = () => {
                 </Grid.Column>
 
                 <Grid.Column>
-                  {/* <div className="weather-wind-container"> */}
                   <div>
                     <FiWind id="icons" />
                     {Math.round(weather.wind.speed)}km/hr{" "}
